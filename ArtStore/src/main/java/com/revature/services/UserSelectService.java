@@ -11,7 +11,7 @@ public abstract class UserSelectService {
 	
 	public static void mainMenu() throws IOException, SQLException {
 		//prints menu from file
-		File file = new File("C:\\Users\\Kevin\\Documents\\revature\\project0\\ArtStore\\src\\main\\resources\\MainMenu.txt");
+		File file = new File("C:\\Users\\Kevin\\Documents\\revature\\project0\\kevin-aarstad//ArtStore\\src\\main\\resources\\MainMenu.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\Z");
 		System.out.println(sc.next());

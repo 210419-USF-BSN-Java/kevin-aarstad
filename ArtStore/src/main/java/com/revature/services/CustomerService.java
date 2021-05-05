@@ -36,6 +36,7 @@ public abstract class CustomerService {
 				customer.setName(username);
 				custsql.add(customer);
 				customer = custsql.getByName(username);
+				System.out.println("New customer created! Username: " + customer.getName());
 			}
 		customerSkip++;
 		}

@@ -7,10 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
 import com.revature.models.Customer;
 import com.revature.models.Payment;
 import util.ConnectionUtil;

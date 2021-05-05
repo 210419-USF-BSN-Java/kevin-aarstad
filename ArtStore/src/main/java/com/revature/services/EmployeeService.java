@@ -131,6 +131,7 @@ public abstract class EmployeeService {
 	
 	public static void employeeViewPayments() throws IOException, SQLException {
 		paysql.getWeeklyPayments();
+		in.nextLine();
 		System.out.println("Press enter to return to employee menu");
 		in.nextLine();
 		employeeMenu();
