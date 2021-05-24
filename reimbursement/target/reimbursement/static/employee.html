@@ -12,16 +12,14 @@
     </head>
 <body>
     <h2 id="user"></h2>
-    <form value="http://localhost:8080/reimbursement/index.html">
-        <input type='submit' class="btn btn-secondary btn-block" value='Logout'/>
-    </form><br>
+    <button id="logout" class="btn btn-secondary btn-block">Logout</button>
     <form value="http://localhost:8080/reimbursement/static/add-reimbursement.html">
         <input type='submit' class="btn btn-primary btn-block" value='Create Reimbursement Request'/>
     </form><br>
     <button id="empPending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_empPending">Show Pending Reimbursement Requests</button>
     <button id="empResolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_empResolved">Show Resolved Reimbursement Requests</button>
 
-    <div class="modal fade" id="all_emppending" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="all_empPending" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <table id="list_pendingReimb" class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -39,8 +37,9 @@
             <tbody id="list_empPending">
             </tbody>
     </table>
+    <button id="empResolved" class="btn btn-primary btn-block" data-dismiss="modal" data-target="#all_empPending">Close</button>
     </div>
-    <div class="modal fade" id="all_empResolved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="all_empResolved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <table id="list_resolvedReimb" class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -58,7 +57,9 @@
             <tbody id="list_empResolved">
             </tbody>
     </table>
+    <button id="empResolved" class="btn btn-primary btn-block" data-dismiss="modal" data-target="#all_empResolved">Close</button>
     </div>
+    
     <script src="js/employee.js"></script>
 </body>
 </html>

@@ -26,13 +26,14 @@ public class LoginDelegate {
 
 		if(user == null) {
 			log.info("Incorrect login");
+			System.out.println("~~~~~~Incorrect Login~~~~~~");
 			response.sendError(401);
 		}
 		else {
 			String token = user.getId() + ":" + user.getRole();
 			response.setStatus(200);
 			response.setHeader("Authorization", token);
-			System.out.println("~~~~~~~~~Successful login by user ID: " + user.getId() + "~~~~~~~~~");
+			System.out.println("~~~~~~~~~Successful login by user token: " + token + "~~~~~~~~~");
 			log.info("Successful login by user ID: " + user.getId());
 		}
 	}

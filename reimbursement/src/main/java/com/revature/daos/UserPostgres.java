@@ -216,11 +216,12 @@ public class UserPostgres implements UserDao{
 				user.setUsername(username);
 				user.setPassword(password);
 				user.setId(rs.getInt("ers_users_id"));
-				user.setFirstName(rs.getString("user_fist_name"));
+				user.setFirstName(rs.getString("user_first_name"));
 				user.setLastName(rs.getString("user_last_name"));
 				user.setEmail(rs.getString("user_email"));
 				user.setRole(rs.getInt("user_role_id"));
 			}
+			System.out.println("~~~~~~found " + user + " ~~~~~~");
 			
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();

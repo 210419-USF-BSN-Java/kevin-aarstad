@@ -1,20 +1,18 @@
 let token = sessionStorage.getItem("token");
+document.getElementById("logout").addEventListener("click", logout);
 document.getElementById("empPending").addEventListener("click", listPending);
 document.getElementById("empResolved").addEventListener("click", listResolved);
+let tokenArr = token.split(":");
+let startUrl = "http://localhost:8080/reimbursements/api/users"
+sendGetRequest(startUrl + tokenArr[0], displayName);
 
-if (!token) {
-	window.location.href  = "http://localhost:8080/reimbursement/static/login.html";
-} else {
-	let tokenArr = token.split(":");
-	if (tokenArr.length == 2) {
-		let baseUrl = "http://localhost:8080/reimbursement/api/users/";
-		sendGet(baseUrl + tokenArr[0], displayName);
-	} else {
-		window.location.href  = "http://localhost:8080/reimbursement/static/login.html";
-	}
+function displayName() {
+    let xhr = new XMLHttpRequest();
+	let user = JSON.parse(xhr.response);
+	document.getElementById("user").innerHTML = `Welcome Employee: ${user.username}!`;
 }
 
-function sendGet(url, callback) {
+function sendGetRequest(url, callback) {
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", url);
 	xhr.onreadystatechange = function(){
@@ -26,11 +24,6 @@ function sendGet(url, callback) {
 	}
 	xhr.setRequestHeader("Authorization", token);
 	xhr.send();
-}
-
-function displayName(xhr) {
-	let user = JSON.parse(xhr.response);
-	document.getElementById("user").innerHTML = `Welcome Employee: ${user.username}!`;
 }
 
 function listPending(){
@@ -84,7 +77,7 @@ function listPending(){
                         <td>${status}</td>
                     </tr>
                 `)
-                $('#list_all').append(info);
+                $('#list_empPending').append(info);
             }
             }
         }
@@ -146,11 +139,17 @@ function listResolved(){
                         <td>${status}</td>
                     </tr>
                 `)
-                $('#list_all').append(info);
+                $('#list_empResolved').append(info);
             }
             }
         }
     }
     xhr.setRequestHeader("Authorization", token);
 	xhr.send();
+}
+
+function logout(){
+    let xhr = new XMLHttpRequest();
+    xhr.status = 401;
+    window.location.href="http://localhost:8080/reimbursement/static/login.html";
 }
