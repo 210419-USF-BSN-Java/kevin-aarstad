@@ -1,30 +1,23 @@
-let token = sessionStorage.getItem("token");
-let content = document.getElementById("reimbursements");
+let cookie = document.cookie;
+console.log(cookie);
 document.getElementById("pending").addEventListener("click", listPending);
 document.getElementById("resolved").addEventListener("click", listResolved);
-document.getElementById("all").addEventListener("click", listAll);
+document.getElementById("allbyId").addEventListener("click", listAllById);
+document.getElementById("resolve").addEventListener("click", resolveRequest);
+let url = 'http://localhost:8080/reimbursement/main/reimbursements';
 
-if (!token){
-    window.location.href = "http://localhost:8080/reimbursements/static/login.html";
-}
-else {
-    let tokenArray = token.split(":");
-    if(tokenArray.length == 2){
-        let base = "http://localhost:8080/reimbursement/api/reimbursements/all";
-    }
-    else{
-        window.location.href = "http://localhost:8080/reimbursements/static/login.html";
-    }
-}
 
-function listAll(){
+function listAllById(){
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", base)
+    xhr.open("GET", url)
+    let authorId = document.getElementById("emp_id").value;
+    console.log("author id= " + authorId);
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
-            let list = xhr.getResponseHeader("allReimb");
-            let reimbursements = JSON.parse(list);
+            let reimbursements = JSON.parse(this.responseText);
             for(let reimb of reimbursements){
+
+            if (reimb.author == authorId){
                 let status = "";
                 let type = "";
             
@@ -68,25 +61,25 @@ function listAll(){
                         <td>${status}</td>
                     </tr>
                 `)
-                $('#list_all').append(info);
+                $('#list_empReimb').append(info);
+            }
             }
         }
     }
-    xhr.setRequestHeader("Authorization", token);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send();
 }
 
 function listPending(){
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", base)
+    xhr.open("GET", url)
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
-            let list = xhr.getResponseHeader("allReimb");
-            let reimbursements = JSON.parse(list);
+            let reimbursements = JSON.parse(this.responseText);
             for(let reimb of reimbursements){
+            if(reimb.status == 1){
                 let status = "";
                 let type = "";
-            if(reimb.status == 1){
                 
                 status = "Pending";
 
@@ -121,21 +114,20 @@ function listPending(){
             }
         }
     }
-    xhr.setRequestHeader("Authorization", token);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send();
 }
 
 function listResolved(){
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", base)
+    xhr.open("GET", url)
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
-            let list = xhr.getResponseHeader("allReimb");
-            let reimbursements = JSON.parse(list);
+            let reimbursements = JSON.parse(this.responseText);
             for(let reimb of reimbursements){
+            if(reimb.status == 2 || reimb.status == 3){
                 let status = "";
                 let type = "";
-            if(reimb.status == 2 || reimb.status == 3){
                 switch (reimb.status){
                     case 2:
                         status = "Approved";
@@ -178,6 +170,36 @@ function listResolved(){
             }
         }
     }
-    xhr.setRequestHeader("Authorization", token);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send();
+}
+
+function resolveRequest(){
+    let status = document.getElementById('approve_deny').value;
+    let rUrl;
+    if(status == 2){
+        rUrl = 'http://localhost:8080/reimbursement/main/approve-reimbursement';
+    }
+    else if(status == 3){
+        rUrl = 'http://localhost:8080/reimbursement/main/deny-reimbursement';
+    }
+
+    let xhr = new XMLHttpRequest;
+    xhr.open("POST", rUrl);
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let splitCookie = cookie.split(';');
+            let resolverId = splitCookie[0].split('=')[1];
+            console.log("resolver id=" + resolverId);
+            let reimbId = document.getElementById("request_id").value;
+
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            let requestBody = `id=${reimbId}&resolverId=${resolverId}`;
+            xhr.send(requestBody);
+            document.getElementById("message").innerHTML="Reimbursment resolved!";
+        }
+    }
+
+
 }

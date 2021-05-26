@@ -12,68 +12,93 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form value="manager.html">
-        <input type='submit' class="btn btn-secondary btn-block" value='Return to Manager page'/>
-    </form><br>
+    <a href="manager.html" class="btn btn-secondary btn-block">Return to Manager page</a><br>
     <div>
-        <button id="all" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_reimb">Show All Requests</button>
-        <button id="pending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#pending_reimb">Show All Pending Requests</button>
-        <button id="resolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#resolved_reimb">Show All Resolved Requests</button>
+        <button id="pending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_pending">Show All Pending Requests</button>
+        <button id="resolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_resolved">Show All Resolved Requests</button>
+        <br><button id="allbyId" class="btn btn-primary btn-large" data-toggle="modal" data-target="#all_by_emp">Show All Requests By Employee ID</button>
+        <label>Employee ID</label>
+        <input type="number" id="emp_id" name="emp_id" placeholder="Employee ID"><br><br>
+
+        <div>
+            <button type="button" class="btn btn-primary btn-large" id="resolve" style="display: inline">Resolve by Request ID</button>
+            <label>Request ID</label>
+            <input type="number" id="request_id" placeholder="Request ID" style="width: 100px; display: inline">
+            <select class="form-control" id="approve_deny" style="width: 175px; display: inline">
+                <option value="" disabled selected>Approve or Deny</option>
+                <option value="2">Approve</option>
+                <option value="3">Deny</option>
+            </select>
+            <div id="message" style="color: red"></div>
+        </div> <br>
     </div>
-    <div class="modal fade" id="all_reimb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <table id="list_reimb" class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Submitted</th>
-                    <th scope="col">Author ID</th>
-                    <th scope="col">Resolved</th>
-                    <th scope="col">Resolver</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody id="list_all">
-            </tbody>
-    </table>
+    <div id="message" style="color: red"></div>
+
+    <div class="modal" id="all_by_emp" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbResolved" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Resolved</th>
+                        <th scope="col">Resolver</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_empReimb">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
     </div>
-    <div class="modal fade" id="all_pending" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <table id="list_reimbPending" class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Submitted</th>
-                    <th scope="col">Author ID</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody id="list_pending">
-            </tbody>
-    </table>
+
+    <div class="modal" id="all_pending" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbPending" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_pending">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
     </div>
-    <div class="modal fade" id="all_resolved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <table id="list_reimbResolved" class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Submitted</th>
-                    <th scope="col">Author ID</th>
-                    <th scope="col">Resolved</th>
-                    <th scope="col">Resolver</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody id="list_resolved">
-            </tbody>
-    </table>
+
+    <div class="modal" id="all_resolved" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbResolved" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Resolved</th>
+                        <th scope="col">Resolver</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_resolved">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
     </div>
     <script src="js/view-requests.js"></script>
 </body>

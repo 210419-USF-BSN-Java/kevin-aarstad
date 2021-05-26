@@ -1,28 +1,15 @@
-let token = sessionStorage.getItem("token");
+console.log("view-employees.js")
+let url = 'http://localhost:8080/reimbursement/main/employees';
+sendGetRequest(url);
 
-if (!token){
-    window.location.href = "http://localhost:8080/reimbursements/static/login.html";
-}
-else {
-    let tokenArray = token.split(":");
-    if(tokenArray.length == 2){
-        let base = "http://localhost:8080/reimbursement/api/employees/all";
-        sendGetRequest(base);
-    }
-    else{
-        window.location.href = "http://localhost:8080/reimbursements/static/login.html";
-    }
-}
 
 function sendGetRequest(url){
     console.log("in view-employees sendGetRequest");
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", url);
 	xhr.onreadystatechange = function(){
-
         if(xhr.readyState == 4 && xhr.status == 200){
-            let employeeList = xhr.getResponseHeader("allEmp");
-            let list = JSON.parse(employeeList);
+            let list = JSON.parse(this.responseText);
             console.log(list);
             for(let emp of list){
                 let info = $(`
@@ -37,10 +24,7 @@ function sendGetRequest(url){
                 $('#emp_list').append(info);
             }
         }
-        else if (xhr.readyState == 4){
-            window.location.href = "http://localhost:8080/reimbursements/static/login.html";
-        }
     }
-    xhr.setRequestHeader("Authorization", token);
-    xhr.send();
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send();
 }

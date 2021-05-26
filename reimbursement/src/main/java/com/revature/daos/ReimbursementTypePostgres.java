@@ -32,9 +32,6 @@ public class ReimbursementTypePostgres implements ReimbursementTypeDao{
 		}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	
 		return null;
@@ -57,10 +54,7 @@ public class ReimbursementTypePostgres implements ReimbursementTypeDao{
 		}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}		
+		}	
 		return rt;
 	}
 
@@ -83,17 +77,15 @@ public class ReimbursementTypePostgres implements ReimbursementTypeDao{
 		}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}		
 		return types;
 	}
 
 	@Override
-	public Boolean update(ReimbursementType t) {
+	public ReimbursementType update(ReimbursementType t) {
+		ReimbursementType rt = null;
 		String sql = "update ers_reimbursement_type set reimb_type = ? where reimb_type_id = ?;";
-		boolean success = false;
+
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()){
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -101,14 +93,11 @@ public class ReimbursementTypePostgres implements ReimbursementTypeDao{
 			ps.setInt(2, t.getId());
 			
 			ps.executeUpdate();
-			success = true;
+			rt = t;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}		
-		return success;
+		}	
+		return rt;
 	}
 
 	@Override
@@ -124,9 +113,6 @@ public class ReimbursementTypePostgres implements ReimbursementTypeDao{
 			success = true;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}	
 		
 		return success;

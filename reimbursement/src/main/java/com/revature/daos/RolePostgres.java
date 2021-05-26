@@ -30,9 +30,6 @@ public class RolePostgres implements RoleDao{
 			}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		
 		return null;
@@ -55,10 +52,7 @@ public class RolePostgres implements RoleDao{
 			}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}		
+		}	
 		return role;
 	}
 
@@ -80,15 +74,13 @@ public class RolePostgres implements RoleDao{
 			}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}		
 		return roles;
 	}
 
 	@Override
-	public Boolean update(Role t) {
+	public Role update(Role t) {
+		Role r = null;
 		String sql = "update ers_user_roles set ers_user_role = ? where ers_user_role_id = ?;";
 		boolean success = false;
 		
@@ -98,14 +90,11 @@ public class RolePostgres implements RoleDao{
 			ps.setInt(2, t.getId());
 			
 			ps.executeUpdate();
-			success = true;
+			r = t;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}		
-		return success;
+		return r;
 	}
 
 	@Override
@@ -121,10 +110,7 @@ public class RolePostgres implements RoleDao{
 			success = true;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	
+		}
 		
 		return success;
 	}

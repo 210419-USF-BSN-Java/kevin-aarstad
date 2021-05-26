@@ -1,13 +1,16 @@
-document.getElementById('submit').addEventListener("click", addReimbursement);
+let cookie = document.cookie;
+document.getElementById("submit_reimb").addEventListener("click", addReimbursement);
+let url = 'http://localhost:8080/reimbursement//main/emp-reimbursements';
 
 function addReimbursement(){
-    let amount = document.getElementById("amount");
-    let type = document.getElementById("type");
-    let description = document.getElementById("desc");
+    console.log("adding reimbursement")
+    let amount = document.getElementById("amount").value;
+    let type = document.getElementById("type").value;
+    let description = document.getElementById("desc").value;
+    let splitCookie = cookie.split(';');
+    let userId = splitCookie[0].split('=')[1];
 
-    let token = sessionStorage.getItem("token");
-    let xhr = new XMLHttpRequest();
-    let url = "http://localhost:8080/reimbursement/submit";
+    let xhr = new XMLHttpRequest;
     xhr.open("POST", url);
     
     xhr.onreadystatechange = function(){
@@ -20,7 +23,6 @@ function addReimbursement(){
         }
     }
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.setRequestHeader("Authorization",token);
-	let requestBody = `amount=${amount}&type=${type}&description=${description}`;
-	xhr.send(requestBody);
+	let requestBody = `amount=${amount}&type=${type}&description=${description}&userId=${userId}`;
+    xhr.send(requestBody);
 }

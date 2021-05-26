@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reimbursement Employee</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <a href="employee.html" class="btn btn-secondary btn-block">Return to Employee page</a><br>
+    <div class="container">
+        <table id="employee_info" class="table table-striped table=bordered">
+            <thead class="thead-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+            </thead>
+            <tbody id="emp_info">
+                <!--Populated by JS-->
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <div class="form">
+            <button id="fNameUpdate" class="btn btn-primary btn-large" style="display: inline">Update First name</button>
+            <input type="text" id="firstName" class="form-control" style="display: inline" placeholder="First name">            
+            <div id="fNameMessage" style="color:red"></div>
+        </div>
+        <div class="form">
+            <button id="lNameUpdate" class="btn btn-primary btn-large" style="display: inline">Update Last name</button>
+            <input type="text" id="lastName" class="form-control" style="display: inline" placeholder="Last name">            
+            <div id="lNameMessage" style="color:red"></div>
+        </div>
+        <div class="form">
+            <button id="passwordUpdate" class="btn btn-primary btn-large" style="display: inline">Update Password</button>
+            <input type="text" id="password" class="form-control" style="display: inline" placeholder="Password">            
+            <div id="passwordMessage" style="color:red"></div>
+        </div>
+        <div class="form">
+            <button id="emailUpdate" class="btn btn-primary btn-large" style="display: inline">Update Email</button>
+            <input type="text" id="email" class="form-control" style="display: inline" placeholder="email">            
+            <div id="emailMessage" style="color:red"></div>
+        </div>
+    </div>
+    <script src="js/emp-info.js"></script>
+</body>
+</html>

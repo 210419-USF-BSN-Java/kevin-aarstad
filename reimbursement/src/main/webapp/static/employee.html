@@ -12,52 +12,54 @@
     </head>
 <body>
     <h2 id="user"></h2>
-    <button id="logout" class="btn btn-secondary btn-block">Logout</button>
-    <form value="http://localhost:8080/reimbursement/static/add-reimbursement.html">
-        <input type='submit' class="btn btn-primary btn-block" value='Create Reimbursement Request'/>
-    </form><br>
-    <button id="empPending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_empPending">Show Pending Reimbursement Requests</button>
-    <button id="empResolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_empResolved">Show Resolved Reimbursement Requests</button>
+    <a href="../index.html" class="btn btn-secondary btn-block">Logout</a><br>
+    <a href="add-reimbursement.html" class="btn btn-primary btn-block">Create Reimbursement Request</a>
+    <button id="pending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_pending">Show Pending Requests</button>
+    <button id="resolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_resolved">Show Resolved Requests</button>
+    <a href="emp-info.html" class="btn btn-primary btn-block">View/Edit Personal Info</a>
 
-    <div class="modal" id="all_empPending" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <table id="list_pendingReimb" class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Submitted</th>
-                    <th scope="col">Author ID</th>
-                    <th scope="col">Resolved</th>
-                    <th scope="col">Resolver</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody id="list_empPending">
-            </tbody>
-    </table>
-    <button id="empResolved" class="btn btn-primary btn-block" data-dismiss="modal" data-target="#all_empPending">Close</button>
+    <div class="modal" id="all_pending" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbPending" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_pending">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
     </div>
-    <div class="modal" id="all_empResolved" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <table id="list_resolvedReimb" class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Submitted</th>
-                    <th scope="col">Author ID</th>
-                    <th scope="col">Resolved</th>
-                    <th scope="col">Resolver</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody id="list_empResolved">
-            </tbody>
-    </table>
-    <button id="empResolved" class="btn btn-primary btn-block" data-dismiss="modal" data-target="#all_empResolved">Close</button>
+
+    <div class="modal" id="all_resolved" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbResolved" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Resolved</th>
+                        <th scope="col">Resolver</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_resolved">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
     </div>
     
     <script src="js/employee.js"></script>

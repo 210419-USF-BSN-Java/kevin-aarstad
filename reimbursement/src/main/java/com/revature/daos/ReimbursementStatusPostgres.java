@@ -31,9 +31,6 @@ public class ReimbursementStatusPostgres implements ReimbursementStatusDao{
 		}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		return null;
 	}
@@ -55,9 +52,6 @@ public class ReimbursementStatusPostgres implements ReimbursementStatusDao{
 		}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}		
 		return reimbStatus;
 	}
@@ -80,17 +74,14 @@ public class ReimbursementStatusPostgres implements ReimbursementStatusDao{
 		}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}		
 		return statuses;
 	}
 
 	@Override
-	public Boolean update(ReimbursementStatus t) {
+	public ReimbursementStatus update(ReimbursementStatus t) {
+		ReimbursementStatus rs= null;
 		String sql = "update ers_reimbursement_status set reimb_status = ? where reimb_status_id = ?;";
-		boolean success = false;
 		
 		try (Connection con = ConnectionUtil.getConnectionFromFile()){
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -98,14 +89,12 @@ public class ReimbursementStatusPostgres implements ReimbursementStatusDao{
 			ps.setInt(2, t.getId());
 			
 			ps.executeUpdate();
-			success = true;
+			
+			rs = t;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}		
-		return success;
+		return rs;
 	}
 
 	@Override
@@ -121,9 +110,6 @@ public class ReimbursementStatusPostgres implements ReimbursementStatusDao{
 			success = true;
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}	
 		
 		return success;

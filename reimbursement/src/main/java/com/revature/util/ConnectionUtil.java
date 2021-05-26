@@ -24,7 +24,7 @@ public class ConnectionUtil {
 		return connection;
 	}
 	
-	public static Connection getConnectionFromFile() throws SQLException, IOException, ClassNotFoundException
+	public static Connection getConnectionFromFile() throws SQLException, IOException
 	{
 		// loading connection.properties file in order to read properties
 		Properties prop = new Properties();
@@ -36,7 +36,12 @@ public class ConnectionUtil {
 		String password = prop.getProperty("password");
 
 		if(connection == null || connection.isClosed()) {
-			Class.forName("org.postgresql.Driver");
+			try {
+				Class.forName("org.postgresql.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			connection = DriverManager.getConnection(url, username, password);
 		}
 		

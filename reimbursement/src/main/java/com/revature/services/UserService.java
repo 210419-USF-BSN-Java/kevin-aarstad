@@ -9,14 +9,13 @@ public class UserService {
 	
 	static UserPostgres up = new UserPostgres();
 	
-	public List<User> getAllEmployees() throws ClassNotFoundException{
-		List<User> employees = up.getAllEmployees();
-		return employees;		
+	public List<User> getAllEmployees(){
+		return up.getAllEmployees();		
 	}
 	
-	public User loginUser(String username, String password) throws ClassNotFoundException {
-		User user = up.getByUsernameAndPassword(username, password);
-		return user;
+	public User loginUser(String username, String password){
+		System.out.println("*****UserService loginUser*****");
+		return up.getByUsernameAndPassword(username, password);
 	}
 	
 	public int registerUser(User u) {
@@ -26,5 +25,9 @@ public class UserService {
 	
 	public User getById(int id) {
 		return up.getById(id);
+	}
+	
+	public User update(User u) {
+		return up.update(u);
 	}
 }
