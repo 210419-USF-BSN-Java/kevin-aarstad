@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Requests</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <a href="manager.html" class="btn btn-secondary btn-block">Return to Manager page</a><br>
+    <div>
+        <button id="pending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_pending">Show All Pending Requests</button>
+        <button id="resolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_resolved">Show All Resolved Requests</button>
+        <br><button id="allbyId" class="btn btn-primary btn-large" data-toggle="modal" data-target="#all_by_emp">Show All Requests By Employee ID</button>
+        <label>Employee ID</label>
+        <input type="number" id="emp_id" name="emp_id" placeholder="Employee ID"><br><br>
+
+        <div>
+            <label>Request ID</label>
+            <input type="number" id="reimbId" placeholder="Request ID" style="width: 100px; display: inline">
+            <select class="form-control" id="approve_deny" style="width: 175px; display: inline">
+                <option value="" disabled selected>Approve or Deny</option>
+                <option value="2">Approve</option>
+                <option value="3">Deny</option>
+            </select>
+            <button class="btn btn-primary btn-block" id="resolve_reimb" type="submit">Resolve by Request ID</button>
+            <div id="message" style="color: red"></div>
+        </div> <br>
+    </div>
+    <div id="message" style="color: red"></div>
+
+    <div class="modal" id="all_by_emp" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbResolved" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Resolved</th>
+                        <th scope="col">Resolver</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_empReimb">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="all_pending" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbPending" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_pending">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="all_resolved" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbResolved" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Resolved</th>
+                        <th scope="col">Resolver</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_resolved">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+    <script src="js/view-requests.js"></script>
+</body>
+</html>

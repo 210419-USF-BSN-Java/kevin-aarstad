@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reimbursement Employee</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <h2 id="user"></h2>
+    <a href="../index.html" class="btn btn-secondary btn-block">Logout</a><br>
+    <a href="add-reimbursement.html" class="btn btn-primary btn-block">Create Reimbursement Request</a>
+    <button id="pending" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_pending">Show Pending Requests</button>
+    <button id="resolved" class="btn btn-primary btn-block" data-toggle="modal" data-target="#all_resolved">Show Resolved Requests</button>
+    <a href="emp-info.html" class="btn btn-primary btn-block">View/Edit Personal Info</a>
+
+    <div class="modal" id="all_pending" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbPending" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_pending">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="all_resolved" role="dialog">
+        <div class="modal-dialog">
+            <table id="list_reimbResolved" class="table table-striped table-bordered" style="background-color:#FFFFFF">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Author ID</th>
+                        <th scope="col">Resolved</th>
+                        <th scope="col">Resolver</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="list_resolved">
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+    
+    <script src="js/employee.js"></script>
+</body>
+</html>
